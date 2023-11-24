@@ -20,4 +20,29 @@ Run elasticsearch with python
 
       # Successful response!
       client.info()
-- 
+- Get the doc content:
+  
+        client.get(index="my_index", id="my_document_id")
+- Delete the doc:
+  
+      client.delete(index="my_index", id="my_document_id")
+- Search the doc using query:
+  
+      resp = client.search(index="my_index", query={"match_all": {}})
+      print("Got %d Hits:" % resp['hits']['total']['value'])
+      for hit in resp['hits']['hits']:
+          print(hit)
+- Update the doc:
+  
+      client.update(index="my_index", id="my_document_id", doc={
+          "foo": "bar",
+          "new_field": "new value",
+      })
+- Update the doc:
+
+      doc = {
+          'email': 'rajagupta@gmail.com'
+      }
+      resp = client.update(index="my_index", id="my_document_id", doc=doc)
+      print(resp['result'])
+
